@@ -22,12 +22,12 @@
         <p>of love, patience, and shared memories.</p>
 
         <div class="countdown">
-            {% if days_until == 0 %}
-                Today is the day! Cheers to you! 🥂
-            {% else %}
-                Only {{ days_until }} days until your next anniversary.
-            {% endif %}
-        </div>
+    {% if today_is_anniversary %}
+        Today is your 23rd Anniversary! Cheers to 2003! 🥂
+    {% else %}
+        Only {{ days_until }} days until your next anniversary.
+    {% endif %}
+</div>
     </div>
 </body>
 </html>
