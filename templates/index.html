@@ -5,15 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anniversary Tracker</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #fdf2f2; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; color: #333; }
-        .card { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; border: 2px solid #ffb6c1; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #fdf2f2; display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; color: #333; padding: 20px; }
+        .card { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; border: 2px solid #ffb6c1; max-width: 500px; width: 100%; margin-bottom: 30px; }
         h1 { color: #d63384; margin-bottom: 0.5rem; }
         .big-number { font-size: 3rem; font-weight: bold; color: #d63384; display: block; }
         .subtext { color: #666; margin-bottom: 1.5rem; }
-        .countdown { background: #fff0f3; padding: 1rem; border-radius: 10px; color: #c2185b; font-weight: bold; }
+        .countdown { background: #fff0f3; padding: 1rem; border-radius: 10px; color: #c2185b; font-weight: bold; margin-top: 15px; }
+
+        /* Slideshow Styles */
+        .slideshow-container { max-width: 600px; position: relative; margin: auto; border-radius: 15px; overflow: hidden; box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
+        .mySlides { display: none; }
+        img { vertical-align: middle; width: 100%; height: 400px; object-fit: cover; }
+        
+        .fade { animation-name: fade; animation-duration: 1.5s; }
+        @keyframes fade { from {opacity: .4} to {opacity: 1} }
     </style>
 </head>
 <body>
+
     <div class="card">
         <h1>Happy Anniversary!</h1>
         <p class="subtext">Married since {{ wedding_date }}</p>
@@ -22,12 +31,42 @@
         <p>of love, patience, and shared memories.</p>
 
         <div class="countdown">
-    {% if today_is_anniversary %}
-        Today is your 23rd Anniversary! Cheers to 2003! 🥂
-    {% else %}
-        Only {{ days_until }} days until your next anniversary.
-    {% endif %}
-</div>
+            {% if today_is_anniversary %}
+                Today is your 23rd Anniversary! Cheers to 2003! 🥂
+            {% else %}
+                Only {{ days_until }} days until your next anniversary.
+            {% endif %}
+        </div>
     </div>
+
+    <div class="slideshow-container">
+        <div class="mySlides fade">
+            <img src="{{ url_for('static', filename='images/photo1.png') }}">
+        </div>
+        <div class="mySlides fade">
+            <img src="{{ url_for('static', filename='images/photo2.png') }}">
+        </div>
+        <div class="mySlides fade">
+            <img src="{{ url_for('static', filename='images/photo3.png') }}">
+        </div>
+    </div>
+
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+            slides[slideIndex-1].style.display = "block";  
+            setTimeout(showSlides, 4000); // Change image every 4 seconds
+        }
+    </script>
+
 </body>
 </html>
