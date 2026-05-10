@@ -20,7 +20,7 @@ def index():
     years = today.year - wedding_date.year - ((today.month, today.day) < (wedding_date.month, wedding_date.day))
     
 	# Converts to written words
-	numword = num2words(years, ordinal=True))
+    numword = num2words(years, ordinal=True))
     
     # Calculate next anniversary
     # If today is the anniversary, the "next" one is next year
